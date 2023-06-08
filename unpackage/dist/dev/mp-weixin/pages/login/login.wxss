@@ -1,0 +1,12 @@
+
+.content {
+	height: 100%;
+	width: 100%;
+	background-color: #fff;
+	position: absolute;
+
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+	margin-top: 30pt;
+}
+
