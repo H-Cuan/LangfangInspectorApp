@@ -1557,7 +1557,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"廊坊市公安局督察管理平台","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"廊坊市公安局督察管理平台","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -8938,7 +8938,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"廊坊市公安局督察管理平台","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"廊坊市公安局督察管理平台","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8959,14 +8959,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"廊坊市公安局督察管理平台","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"廊坊市公安局督察管理平台","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"廊坊市公安局督察管理平台","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"廊坊市公安局督察管理平台","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -9062,7 +9062,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"廊坊市公安局督察管理平台","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"廊坊市公安局督察管理平台","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -15855,7 +15855,7 @@ var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/inte
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.uploadImage = exports.updateInfo = exports.modifyPassword = exports.logout = exports.login = exports.getTask = exports.getSuperviseType = exports.getMsgList = exports.getInfo = exports.getDeptTreeList = exports.getAccessToken = exports.delMsg = void 0;
+exports.workflowDesign = exports.workflowBusinessList = exports.uploadImage = exports.updateInfo = exports.taskStatus = exports.taskStatistics = exports.taskDetails = exports.superviseSave = exports.saveWorkflowBusiness = exports.questionList = exports.modifyPassword = exports.logout = exports.login = exports.groupDetails = exports.getWorkflow = exports.getUserList = exports.getTask = exports.getSuperviseType = exports.getSuperviseMethod = exports.getSuperviseContent = exports.getQuesition = exports.getMsgList = exports.getInfo = exports.getDeptTreeList = exports.getAccessToken = exports.delMsg = exports.addQuesiton = exports.addGroup = void 0;
 var _request = _interopRequireDefault(__webpack_require__(/*! ../utils/request.js */ 90));
 // 登录
 var login = function login(data, header) {
@@ -15892,7 +15892,7 @@ exports.modifyPassword = modifyPassword;
 var getAccessToken = function getAccessToken(data) {
   // console.log()
   return (0, _request.default)({
-    url: '/oauth2/token',
+    url: '/auth/oauth2/token',
     method: 'post',
     data: data
   });
@@ -15980,7 +15980,157 @@ var getSuperviseType = function getSuperviseType(data) {
     method: 'get'
   });
 };
+// 获取督察类别
 exports.getSuperviseType = getSuperviseType;
+var getSuperviseMethod = function getSuperviseMethod(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/system/dataDict/list?code=supervise_method',
+    method: 'get'
+  });
+};
+// 获取督察内容
+exports.getSuperviseMethod = getSuperviseMethod;
+var getSuperviseContent = function getSuperviseContent(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/supervise/content/list',
+    method: 'get'
+  });
+};
+// 新建督察内容
+exports.getSuperviseContent = getSuperviseContent;
+var superviseSave = function superviseSave(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/supervise/task/save',
+    method: 'post',
+    data: data
+  });
+};
+// 获取审核流程
+exports.superviseSave = superviseSave;
+var getWorkflow = function getWorkflow(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/process/workflow/read/1',
+    method: 'get'
+  });
+};
+// 获取用户列表
+exports.getWorkflow = getWorkflow;
+var getUserList = function getUserList(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/system/user/index?page=1&pageSize=20',
+    method: 'get'
+  });
+};
+// 新建分组
+exports.getUserList = getUserList;
+var addGroup = function addGroup(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/supervise/group/save',
+    method: 'post',
+    data: data
+  });
+};
+// 任务详情
+exports.addGroup = addGroup;
+var taskDetails = function taskDetails(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/supervise/task/read/' + data,
+    method: 'get'
+  });
+};
+// 获取分组信息
+exports.taskDetails = taskDetails;
+var groupDetails = function groupDetails(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/supervise/group/index?group_name=' + data,
+    method: 'get'
+  });
+};
+// 接收任务
+exports.groupDetails = groupDetails;
+var taskStatus = function taskStatus(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/supervise/task/taskStatus',
+    method: 'put',
+    data: data
+  });
+};
+// 获取问题列表
+exports.taskStatus = taskStatus;
+var questionList = function questionList(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/supervise/question/index?page=1&pageSize=20&dept_id=' + data,
+    method: 'get'
+  });
+};
+// 获取督察具体问题类型
+exports.questionList = questionList;
+var getQuesition = function getQuesition(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/system/dataDict/list?code=supervise_quesition',
+    method: 'get'
+  });
+};
+// 新建督察问题
+exports.getQuesition = getQuesition;
+var addQuesiton = function addQuesiton(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/supervise/question/save',
+    method: 'post',
+    data: data
+  });
+};
+// 督察统计
+exports.addQuesiton = addQuesiton;
+var taskStatistics = function taskStatistics(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/supervise/task/taskStatistics',
+    method: 'get'
+  });
+};
+// 督察审批
+exports.taskStatistics = taskStatistics;
+var saveWorkflowBusiness = function saveWorkflowBusiness(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/process/workflowBusiness/save',
+    method: 'post',
+    data: data
+  });
+};
+// 流程图列表
+exports.saveWorkflowBusiness = saveWorkflowBusiness;
+var workflowBusinessList = function workflowBusinessList(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/process/workflowBusiness/list?business_id=' + data,
+    method: 'get'
+  });
+};
+// 新建流程
+exports.workflowBusinessList = workflowBusinessList;
+var workflowDesign = function workflowDesign(data) {
+  // console.log()
+  return (0, _request.default)({
+    url: '/auth/process/workflow/design',
+    method: 'post',
+    data: data
+  });
+};
+exports.workflowDesign = workflowDesign;
 
 /***/ }),
 /* 90 */
@@ -16040,21 +16190,18 @@ var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ 33));
 // 	return err
 // }
 // )
-var accessToken = uni.getStorageSync("access_token");
-var Token = "Bearer ".concat(uni.getStorageSync("Token"));
+
 // 请求服务器地址
 var baseUrl = '/api';
+// const baseUrl = 'https://120.211.58.75:26006'
 // 向外暴露一个方法 myRequest
 var request = function request(options) {
   //加载loading
-  uni.showLoading({
-    title: "加载中",
-    mask: true
-  });
 
+  var Token = "Bearer ".concat(uni.getStorageSync("Token"));
   // 获取 token
   var token = uni.getStorageSync("Token");
-
+  var accessToken = uni.getStorageSync("access_token");
   // 在请求头中添加 token
   if (token) {
     options.header = {
@@ -16067,6 +16214,7 @@ var request = function request(options) {
     uni.request({
       // 开发者服务器接口地址（请求服务器地址 + 具体接口名）
       url: baseUrl + options.url,
+      sslVerify: false,
       // 请求方式（若不传，则默认为 GET ）
       method: options.method || 'GET',
       // 请求参数（若不传，则默认为 {} ）
@@ -16078,7 +16226,6 @@ var request = function request(options) {
       },
       // 请求成功
       success: function success(res) {
-        uni.hideLoading();
         // 此判断可根据自己需要更改
         // 添加响应拦截器
         if (res.statusCode === 401) {
@@ -16140,16 +16287,7 @@ exports.default = _default;
 /* 122 */,
 /* 123 */,
 /* 124 */,
-/* 125 */
-/*!*****************************************!*\
-  !*** D:/app/廊坊市督察管理平台/static/right.png ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
+/* 125 */,
 /* 126 */,
 /* 127 */,
 /* 128 */,
@@ -16166,36 +16304,9 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACt
 /* 139 */,
 /* 140 */,
 /* 141 */,
-/* 142 */
-/*!*********************************************!*\
-  !*** D:/app/廊坊市督察管理平台/static/daishenpi.png ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/static/daishenpi.png";
-
-/***/ }),
-/* 143 */
-/*!**********************************************!*\
-  !*** D:/app/廊坊市督察管理平台/static/banlizhong.png ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/static/banlizhong.png";
-
-/***/ }),
-/* 144 */
-/*!**********************************************!*\
-  !*** D:/app/廊坊市督察管理平台/static/yiwancheng.png ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/static/yiwancheng.png";
-
-/***/ }),
+/* 142 */,
+/* 143 */,
+/* 144 */,
 /* 145 */,
 /* 146 */,
 /* 147 */,
@@ -16211,7 +16322,57 @@ module.exports = "/static/yiwancheng.png";
 /* 157 */,
 /* 158 */,
 /* 159 */,
-/* 160 */
+/* 160 */,
+/* 161 */,
+/* 162 */,
+/* 163 */,
+/* 164 */,
+/* 165 */,
+/* 166 */,
+/* 167 */,
+/* 168 */,
+/* 169 */,
+/* 170 */,
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */
 /*!****************************************************************************!*\
   !*** D:/app/廊坊市督察管理平台/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \****************************************************************************/
@@ -17232,26 +17393,26 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 161 */,
-/* 162 */,
-/* 163 */,
-/* 164 */,
-/* 165 */,
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */,
-/* 170 */,
-/* 171 */,
-/* 172 */,
-/* 173 */,
-/* 174 */,
-/* 175 */,
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */
 /*!***********************************************************************************************!*\
   !*** D:/app/廊坊市督察管理平台/uni_modules/uni-swipe-action/components/uni-swipe-action-item/mpwxs.js ***!
   \***********************************************************************************************/
@@ -17329,7 +17490,7 @@ var _default = mpMixins;
 exports.default = _default;
 
 /***/ }),
-/* 181 */
+/* 231 */
 /*!**************************************************************************************************!*\
   !*** D:/app/廊坊市督察管理平台/uni_modules/uni-swipe-action/components/uni-swipe-action-item/bindingx.js ***!
   \**************************************************************************************************/
@@ -17348,7 +17509,7 @@ var _default = bindIngXMixins;
 exports.default = _default;
 
 /***/ }),
-/* 182 */
+/* 232 */
 /*!*************************************************************************************************!*\
   !*** D:/app/廊坊市督察管理平台/uni_modules/uni-swipe-action/components/uni-swipe-action-item/mpother.js ***!
   \*************************************************************************************************/
@@ -17367,16 +17528,16 @@ var _default = otherMixins;
 exports.default = _default;
 
 /***/ }),
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */
 /*!************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js ***!
   \************************************************************************************/
@@ -17392,20 +17553,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 86));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ 193));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ 243));
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 88));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 194));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 195));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 196));
-var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ 197));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 244));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 245));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 246));
+var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ 247));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
 var _uniI18n = __webpack_require__(/*! @dcloudio/uni-i18n */ 22);
-var _pages = _interopRequireDefault(__webpack_require__(/*! @/pages.json */ 199));
+var _pages = _interopRequireDefault(__webpack_require__(/*! @/pages.json */ 249));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e34) { throw _e34; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e35) { didErr = true; err = _e35; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
@@ -17872,7 +18033,7 @@ var k = "development" === "development",
   x = true;
 var R = "";
 try {
-  R = (__webpack_require__(/*! uni-stat-config */ 200).default || __webpack_require__(/*! uni-stat-config */ 200)).appid;
+  R = (__webpack_require__(/*! uni-stat-config */ 250).default || __webpack_require__(/*! uni-stat-config */ 250)).appid;
 } catch (e) {}
 var U = {};
 function L(e) {
@@ -24715,7 +24876,7 @@ exports.default = Ns;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
-/* 193 */
+/* 243 */
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
   \**********************************************************************/
@@ -24731,7 +24892,7 @@ function _assertThisInitialized(self) {
 module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 194 */
+/* 244 */
 /*!*********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
   \*********************************************************/
@@ -24758,7 +24919,7 @@ function _inherits(subClass, superClass) {
 module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 195 */
+/* 245 */
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
   \**************************************************************************/
@@ -24766,7 +24927,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 /***/ (function(module, exports, __webpack_require__) {
 
 var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 193);
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 243);
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
@@ -24778,7 +24939,7 @@ function _possibleConstructorReturn(self, call) {
 module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 196 */
+/* 246 */
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
   \***************************************************************/
@@ -24794,16 +24955,16 @@ function _getPrototypeOf(o) {
 module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 197 */
+/* 247 */
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js ***!
   \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ 196);
+var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ 246);
 var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
-var isNativeFunction = __webpack_require__(/*! ./isNativeFunction.js */ 198);
+var isNativeFunction = __webpack_require__(/*! ./isNativeFunction.js */ 248);
 var construct = __webpack_require__(/*! ./construct.js */ 15);
 function _wrapNativeSuper(Class) {
   var _cache = typeof Map === "function" ? new Map() : undefined;
@@ -24834,7 +24995,7 @@ function _wrapNativeSuper(Class) {
 module.exports = _wrapNativeSuper, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 198 */
+/* 248 */
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/isNativeFunction.js ***!
   \*****************************************************************/
@@ -24847,7 +25008,7 @@ function _isNativeFunction(fn) {
 module.exports = _isNativeFunction, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 199 */
+/* 249 */
 /*!****************************************************************!*\
   !*** D:/app/廊坊市督察管理平台/pages.json?{"type":"origin-pages-json"} ***!
   \****************************************************************/
@@ -24892,7 +25053,10 @@ var _default = {
     "style": {
       "navigationBarBackgroundColor": "#afc6fe",
       "navigationBarTextStyle": "black",
-      "navigationBarTitleText": "统计"
+      "navigationBarTitleText": "统计",
+      "app-plus": {
+        "titleNView": false
+      }
     }
   }, {
     "path": "pages/my/my",
@@ -24926,6 +25090,36 @@ var _default = {
     "path": "pages/release/release",
     "style": {
       "navigationBarTitleText": "督察发布",
+      "enablePullDownRefresh": false
+    }
+  }, {
+    "path": "pages/userList/userList",
+    "style": {
+      "navigationBarTitleText": "用户列表",
+      "enablePullDownRefresh": false
+    }
+  }, {
+    "path": "pages/receiveTasks/receiveTasks",
+    "style": {
+      "navigationBarTitleText": "我的任务",
+      "enablePullDownRefresh": false
+    }
+  }, {
+    "path": "pages/performTask/performTask",
+    "style": {
+      "navigationBarTitleText": "我的任务",
+      "enablePullDownRefresh": false
+    }
+  }, {
+    "path": "pages/scene/scene",
+    "style": {
+      "navigationBarTitleText": "现场督察",
+      "enablePullDownRefresh": false
+    }
+  }, {
+    "path": "pages/audit/audit",
+    "style": {
+      "navigationBarTitleText": "审核",
       "enablePullDownRefresh": false
     }
   }],
@@ -24966,7 +25160,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 200 */
+/* 250 */
 /*!***************************************************!*\
   !*** D:/app/廊坊市督察管理平台/pages.json?{"type":"stat"} ***!
   \***************************************************/

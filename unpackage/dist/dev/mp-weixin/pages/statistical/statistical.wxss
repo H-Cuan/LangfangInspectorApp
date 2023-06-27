@@ -1,0 +1,16 @@
+
+page{
+	height: 100%;
+	background-color: #f2f4f8;
+}
+.content{
+	width: 100%;
+	height: 40%;
+	background: linear-gradient(#afc6fe, #f2f4f8);
+}
+.line{
+ 	background:#ccc;/*背景色为浅灰色*/
+	width:0.5px;/*设置宽高*/
+	height:45px;
+}
+

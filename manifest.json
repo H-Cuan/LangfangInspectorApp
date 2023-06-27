@@ -17,7 +17,9 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {},
+        "modules" : {
+            "Camera" : {}
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
@@ -120,7 +122,7 @@
             // "port" : "http://192.168.2.217:8074"
             "proxy" : {
                 "/api" : {
-                    "target" : "https://192.168.2.77:8443",
+                    "target" : "https://120.211.58.75:26006/",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {
@@ -133,5 +135,5 @@
     "locale" : "zh-Hans",
     "fallbackLocale" : "zh-Hans"
 }
-
+/* ios打包配置 *//* SDK配置 *//* 快应用特有相关 *//* 小程序特有相关 */// "port" : "http://192.168.2.217:8074"
 

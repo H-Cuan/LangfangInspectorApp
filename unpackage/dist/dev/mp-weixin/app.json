@@ -8,7 +8,12 @@
     "pages/Personal/Personal",
     "pages/changePw/changePw",
     "pages/task/task",
-    "pages/release/release"
+    "pages/release/release",
+    "pages/userList/userList",
+    "pages/receiveTasks/receiveTasks",
+    "pages/performTask/performTask",
+    "pages/scene/scene",
+    "pages/audit/audit"
   ],
   "subPackages": [],
   "window": {

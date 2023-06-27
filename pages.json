@@ -26,6 +26,7 @@
 			"style": {
 				"navigationBarBackgroundColor": "#afc6fe",
 				"navigationBarTextStyle": "black",
+				// "enablePullDownRefresh": true,
 				"navigationBarTitleText": "消息"
 			}
 		},
@@ -34,7 +35,10 @@
 			"style": {
 				"navigationBarBackgroundColor": "#afc6fe",
 				"navigationBarTextStyle": "black",
-				"navigationBarTitleText": "统计"
+				"navigationBarTitleText": "统计",
+				"app-plus":{
+											"titleNView":false //去掉app+h5顶部导航
+										}
 			}
 		},
 		{
@@ -84,6 +88,87 @@
 		    }
 		    
 		}
+        ,{
+            "path" : "pages/userList/userList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "用户列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/receiveTasks/receiveTasks",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的任务",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/performTask/performTask",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的任务",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/scene/scene",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "现场督察",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/audit/audit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "审核",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/activist/activist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "维权申请列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/safeguarding/safeguarding",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "维权申请",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/taskDetails/taskDetails",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "任务详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/InspectorRecords/InspectorRecords",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "督察问题记录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

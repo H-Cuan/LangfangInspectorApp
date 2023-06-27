@@ -18,7 +18,7 @@
 	padding-top: 50px;
 	padding-left: 20px;
 	z-index: 200;
-	background-image: url('http://192.168.2.206:9502/uploadfile/20230601/522799186018635776.png');
+	background-image: url(/static/522799186018635776.png);
 	background-size: cover;
 	display: flex;
 }

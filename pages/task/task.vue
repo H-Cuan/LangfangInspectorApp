@@ -19,26 +19,35 @@
 		<view class="content">
 			<list>
 				<cell v-for="(item, index) in dataList" :key="item.id">
-					<view class="list">
+					<view class="list" @click="dealTask(item.id)">
 						<view style="width: 10%;">
-							<img style="width: 40px;height: 40px;border-radius: 40px;" :src="avatar" alt="">
+							<image style="width: 40px;height: 40px;border-radius: 40px;" :src="avatar" alt="">
 						</view>
-						<view style="width: 50%;">
+						<view v-if="jichu" style="width: 50%;">
 							<view style="font-size: 1.1em;font-weight: bold;">{{item.name}}</view>
-							<view style="margin: 5% 0 5% 0;">发布单位：</view>
+							<view style="margin: 5% 0 5% 0;">发布单位：{{item.dept.name}}</view>
 							<view style="margin-bottom: 5%;">督察类别：{{item.super_type}}</view>
 							<view style="margin-bottom: 5%;">督察方式：{{item.super_method}}</view>
 							<view style="margin-bottom: 5%;">督察时间：{{item.super_start_time}}~{{item.super_end_time}}
 							</view>
 						</view>
+						<view v-if="guanli" style="width: 50%;">
+							<view style="font-size: 1.1em;font-weight: bold;">{{item.name}}</view>
+							<view style="margin: 5% 0 5% 0;">问题涉及单位：{{item.dept.name}}</view>
+							<view style="margin-bottom: 5%;">推送时间：{{item.updated_at}}</view>
+							<view style="margin-bottom: 5%;">督察方式：{{item.super_method}}</view>
+							<view style="margin-bottom: 5%;">预警级别：2级</view>
+						</view>
 						<view style="width: 30%;">
 							<view>{{item.updated_at}}</view>
-							<view><img v-if="stateD" style="width: 80px;height: 80px;margin-top: 20%;"
-									src="../../static/daishenpi.png" alt=""></view>
-							<view><img v-if="stateB" style="width: 80px;height: 80px;margin-top: 20%;"
-									src="../../static/banlizhong.png" alt=""></view>
-							<view><img v-if="stateY" style="width: 80px;height: 80px;margin-top: 20%;"
-									src="../../static/yiwancheng.png" alt=""></view>
+							<view v-if="stateD">
+								<image v-if="guanli" style="width: 80px;height: 80px;margin-top: 20%;"src="@/static/daishenpi.png" alt="">
+								<image v-if="jichu" style="width: 80px;height: 80px;margin-top: 20%;"src="@/static/daiducha.png" alt="">	
+									</view>
+							<view><image v-if="stateB" style="width: 80px;height: 80px;margin-top: 20%;"
+									src="@/static/banlizhong.png" alt=""></view>
+							<view><image v-if="stateY" style="width: 80px;height: 80px;margin-top: 20%;"
+									src="@/static/yiwancheng.png" alt=""></view>
 						</view>
 					</view>
 				</cell>
@@ -62,6 +71,8 @@
 				dataList: [
 
 				],
+				guanli:false,
+				jichu:false,
 				stateD: false,
 				stateB: false,
 				stateY: false,
@@ -83,15 +94,50 @@
 
 			};
 		},
+		
 		onLoad(e) {
 			this.getSuperviseType()
 			console.log(uni.getStorageSync('userType'))
+			if(uni.getStorageSync('userType')==200){
+				this.jichu = true
+			}else{
+				this.guanli = true
+			}
 			this.status = e.type
 			this.act = e.type
 			this.getAvatar()
 			this.getTask()
 		},
 		methods: {
+			// 接收任务
+			dealTask(e){
+				console.log(e)
+				if(uni.getStorageSync('userType')==200&this.act==0){
+					uni.navigateTo({
+						url:'../receiveTasks/receiveTasks?taskId='+ e
+					})
+				}
+				if(uni.getStorageSync('userType')==200&this.act==1){
+					uni.navigateTo({
+						url:'../performTask/performTask?taskId='+ e
+					})
+				}
+				if(this.act==2){
+					uni.navigateTo({
+						url:'../taskDetails/taskDetails?taskId='+ e
+					})
+				}
+				if(uni.getStorageSync('userType')==100&this.act==0){
+					uni.navigateTo({
+						url:'../audit/audit?taskId='+ e
+					})
+				}
+				if(uni.getStorageSync('userType')==100&this.act==1){
+					uni.navigateTo({
+						url:'../performTask/performTask?taskId='+ e
+					})
+				}
+			},
 			// 获取督察类别
 			async getSuperviseType() {
 				const res = await getSuperviseType()
@@ -131,14 +177,28 @@
 											this.stateB = false,
 											this.stateY = true
 									}
-									this.dataList = res.data.data.items
+									this.dataList = res.data.data.items.sort((a, b) => {
+										// 将时间字符串转换为Date对象进行比较
+											let timeA = new Date(a.created_at);
+											let timeB = new Date(b.created_at);
+				  
+											// 按照时间的先后顺序进行排序
+											return timeB - timeA;
+									});
 								})
 							})
 						
 						
 						})
 					}else{
-						this.dataList = res.data.data.items
+						this.dataList = res.data.data.items.sort((a, b) => {
+										// 将时间字符串转换为Date对象进行比较
+											let timeA = new Date(a.created_at);
+											let timeB = new Date(b.created_at);
+				  
+											// 按照时间的先后顺序进行排序
+											return timeB - timeA;
+									});
 					}
 					
 					
@@ -182,6 +242,7 @@
 									this.stateB = false,
 									this.stateY = true
 							}
+							
 							this.dataList = res.data.data.items
 						})
 					})

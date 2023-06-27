@@ -1,0 +1,31 @@
+
+page {
+	height: 100%;
+	background-color: #f3f5f9;
+}
+.content {
+	margin-top: 5%;
+	border-radius: 10px;
+	width: 90%;
+	background-color: #fff;
+}
+.form {
+	margin: 10px;
+}
+.add {
+	border: 1px #007aff solid;
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 25px;
+	color: #007aff;
+}
+.word-count {
+
+	margin-top: 20%;
+	color: #999;
+}
+

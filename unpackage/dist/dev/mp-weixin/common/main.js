@@ -25,12 +25,13 @@ _vue.default.config.productionTip = false;
 _App.default.mpType = 'app';
 var UniIcons = function UniIcons() {
   Promise.all(/*! require.ensure | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then((function () {
-    return resolve(__webpack_require__(/*! ./uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 155));
+    return resolve(__webpack_require__(/*! ./uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 205));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 _vue.default.component('UniIcons', UniIcons);
 _vue.default.prototype.$axios = _axios.default;
-_axios.default.defaults.baseURL = 'https://192.168.2.77:8443'; //
+//axios.defaults.baseURL = 'https://120.211.58.75:26006'
+_axios.default.defaults.baseURL = '/api'; //
 try {
   var isPromise = function isPromise(obj) {
     return !!obj && ((0, _typeof2.default)(obj) === "object" || typeof obj === "function") && typeof obj.then === "function";

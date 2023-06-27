@@ -20,7 +20,7 @@
 						border-radius: 10px 10px 10px 10px;
 						opacity: 1;
 						color: #B5713D;
-						border: 0px solid #FFEBCB;">{{role}}</span>
+						border: 0px solid #FFEBCB;">{{user_type}}</span>
 					</view>
 					<text style="font-size:14px ;margin-top: 8px;">ID:{{id}}</text>
 				</view>
@@ -70,7 +70,7 @@
 				name: '',
 				id:"",
 				token:"",
-				role:''
+				user_type:''
 				
 			};
 		},
@@ -93,7 +93,8 @@
 					that.avatar = res.data.data.user.avatar
 					that.id = res.data.data.user.id
 					that.name =res.data.data.user.nickname
-					that.role = res.data.data.roles[0]
+				console.log(that.avatar)
+					res.data.data.user.user_type ==200?that.user_type = '基础民警':that.user_type='管理层'
 				})
 			},
 			changePassword(){
@@ -119,7 +120,7 @@
 				res.then(ress=>{
 						console.log(ress)
 						if(ress.data.code === 200){
-							uni.removeStorageSync('Token')
+							uni.clearStorage ();
 							setTimeout(() => {
 								uni.showToast({
 									icon: 'success',
@@ -197,7 +198,7 @@
 		padding-top: 50px;
 		padding-left: 20px;
 		z-index: 200;
-		background-image: url('http://192.168.2.206:9502/uploadfile/20230601/522799186018635776.png');
+		background-image: url('@/static/522799186018635776.png');
 		background-size: cover;
 		display: flex;
 	}

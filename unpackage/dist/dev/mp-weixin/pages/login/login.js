@@ -181,6 +181,8 @@ var _api = __webpack_require__(/*! @/api/api */ 89);
 //
 //
 //
+//140624198612112515
+//622133198612112535
 var _default = {
   data: function data() {
     return {
@@ -191,7 +193,16 @@ var _default = {
     };
   },
   onShow: function onShow() {
-    this.getAccessToken();
+    this.getAccessToken(), plus.device.getInfo({
+      success: function success(e) {
+        var clientid = e.uuid;
+        console.log(clientid);
+        uni.setStorageSync('clientid', clientid);
+      },
+      fail: function fail(e) {
+        console.log(e);
+      }
+    });
   },
   methods: {
     changePassword: function changePassword() {
@@ -205,8 +216,8 @@ var _default = {
               case 0:
                 _context.next = 2;
                 return (0, _api.getAccessToken)({
-                  client_id: "A0OzMXjA3vQ1nbNBOIt9BKNGhTii8hTC",
-                  client_secret: "5hvJSwP5OlSFo7oNEsII4w2MzsFCu8WA",
+                  client_id: "yegfeisudzfT9j7OpHoLvkDrkI4GczcS",
+                  client_secret: "DmA2veG2YZoUUdxxyJZ3RJBJ8xz1fiCU",
                   grant_type: "client_credentials",
                   scope: "*"
                 }).then(function (res) {
@@ -224,18 +235,20 @@ var _default = {
     login: function login() {
       var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-        var accessToken, res;
+        var clientid, accessToken, res;
         return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                clientid = uni.getStorageSync('clientid');
                 accessToken = uni.getStorageSync('access_token');
-                _context2.next = 3;
+                _context2.next = 4;
                 return (0, _api.login)(_this.form, {
                   'x-api-header': 'yuanxibing',
-                  'x-access-token': accessToken
+                  'x-access-token': accessToken,
+                  'x-device-code': clientid
                 });
-              case 3:
+              case 4:
                 res = _context2.sent;
                 console.log(res);
                 if (res.data.code === 200) {
@@ -256,6 +269,14 @@ var _default = {
                   if (res.data.message === 'password 字段是必须的') {
                     uni.showToast({
                       title: '请输入密码',
+                      icon: 'error',
+                      mask: true,
+                      duration: 2000
+                    });
+                  }
+                  if (res.data.message === '该设备没有备案') {
+                    uni.showToast({
+                      title: '该设备没有备案',
                       icon: 'error',
                       mask: true,
                       duration: 2000
@@ -294,7 +315,7 @@ var _default = {
                     });
                   }
                 }
-              case 6:
+              case 7:
               case "end":
                 return _context2.stop();
             }

@@ -1,7 +1,7 @@
 <template>
 	<view style="">
 		<view style="height: 40%;">
-			<image src="../../static/background.png" mode="" style="width: 100%;" />
+			<image src="@/static/background.png" mode="" style="width: 100%;" />
 		</view>
 		<view style="margin-left: 20pt; margin-top: -120pt;display: flex;flex-wrap: wrap; justify-content: left;">
 			<text style="width: 100%; font-size: 18pt;color: #fff;position: relative;">您好，</text>
@@ -33,7 +33,9 @@
 	</view>
 </template>
 
-<script>
+<script>	
+	//140624198612112515
+	//622133198612112535
 	import axios from 'axios'
 	import {
 		getAccessToken,
@@ -49,16 +51,27 @@
 			}
 		},
 		onShow() {
-			this.getAccessToken()
+			this.getAccessToken(),
+			plus.device.getInfo({
+						success: function(e) {
+							const clientid = e.uuid;
+							console.log(clientid);
+							uni.setStorageSync('clientid', clientid);
+						},
+						fail: function(e) {
+							console.log(e);
+						}
+					});
 		},
 		methods: {
+			
 			changePassword: function() {
 				this.showPassword = !this.showPassword;
 			},
 			async getAccessToken() {
 				await getAccessToken({
-					client_id: "A0OzMXjA3vQ1nbNBOIt9BKNGhTii8hTC",
-					client_secret: "5hvJSwP5OlSFo7oNEsII4w2MzsFCu8WA",
+					client_id: "yegfeisudzfT9j7OpHoLvkDrkI4GczcS",
+					client_secret: "DmA2veG2YZoUUdxxyJZ3RJBJ8xz1fiCU",
 					grant_type: "client_credentials",
 					scope: "*"
 				}).then(res => {
@@ -67,12 +80,16 @@
 				})
 			},
 			async login() {
+			
+				const clientid = uni.getStorageSync('clientid')
 				const accessToken = uni.getStorageSync('access_token')
 				const res = await login(this.form, {
 					'x-api-header': 'yuanxibing',
-					'x-access-token': accessToken
+					'x-access-token': accessToken,
+					'x-device-code':clientid
 				})
 				console.log(res)
+				
 				if (res.data.code === 200) {
 					uni.setStorageSync('Token', res.data.data.token)
 					uni.switchTab({
@@ -91,6 +108,14 @@
 					if (res.data.message === 'password 字段是必须的') {
 						uni.showToast({
 							title: '请输入密码',
+							icon: 'error',
+							mask:true,
+							duration: 2000
+						})
+					}
+					if (res.data.message === '该设备没有备案') {
+						uni.showToast({
+							title: '该设备没有备案',
 							icon: 'error',
 							mask:true,
 							duration: 2000

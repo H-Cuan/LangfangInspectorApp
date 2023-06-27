@@ -6,7 +6,7 @@
 					<view>头像：</view>
 					<view @click="changeA" style="display: flex;align-items: center;">
 						<img :src="avatar" style="height: 45px;width: 45px;border-radius: 45px;" alt="">
-						<img src="../../static/right.png" style="height: 20px;width: 20px;margin-left: 10px;" alt="">
+						<image src="/static/right.png" style="height: 20px;width: 20px;margin-left: 10px;" ></image>
 					</view>
 				</view>
 				<view style="border-bottom: 1px #ccc solid;"></view>
@@ -121,7 +121,7 @@
 										mask:true,
 										duration:2000
 									})
-									that.avatar = 'http://192.168.2.206:9502' + imgData.data.url
+									that.avatar = 'http://120.211.58.75:26003' + imgData.data.url
 									that.updata.avatar = imgData.data.url
 								}else{
 									uni.showToast({

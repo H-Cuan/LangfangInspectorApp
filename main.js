@@ -8,7 +8,8 @@ App.mpType = 'app'
 import UniIcons from './uni_modules/uni-icons/components/uni-icons/uni-icons.vue'
 Vue.component('UniIcons',UniIcons)
 Vue.prototype.$axios = axios
-axios.defaults.baseURL = 'https://192.168.2.77:8443' //
+//axios.defaults.baseURL = 'https://120.211.58.75:26006'
+axios.defaults.baseURL = '/api' //
 try {
   function isPromise(obj) {
     return (

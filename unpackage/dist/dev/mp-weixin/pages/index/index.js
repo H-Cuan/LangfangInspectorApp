@@ -239,10 +239,12 @@ var _default = {
                 return (0, _api.getInfo)().then(function (res) {
                   console.log(res);
                   uni.setStorageSync('userType', res.data.data.user.user_type);
-                  if (res.data.data.user.user_type == 100) {
-                    _this.showS = false;
-                  }
                   if (res.data.data.user.user_type == 200) {
+                    _this.showS = false;
+                    _this.showA = true;
+                    _this.showF = true;
+                  }
+                  if (res.data.data.user.user_type == 100) {
                     _this.showA = false;
                     _this.showS = true;
                     _this.showF = false;

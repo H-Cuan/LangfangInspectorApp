@@ -3,7 +3,7 @@
 			<uni-swipe-action>
 		 		<uni-swipe-action-item v-for="(item,index) in list" :right-options="options1" @click="delMessage(item)" >
 					<template >
-							<uni-list-chat :clickable="true" :key="index" :title='item.title' avatar="http://192.168.2.206:9502/uploadfile/20230601/522805289091670016.png" :note="item.content" :time="item.updated_at" ></uni-list-chat>
+							<uni-list-chat :clickable="true" :key="index" :title='item.title' avatar="/static/522805289091670016.png" :note="item.content" :time="item.updated_at" ></uni-list-chat>
 					</template>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
